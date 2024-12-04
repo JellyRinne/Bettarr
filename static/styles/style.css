@@ -10,6 +10,11 @@ body{
     font-family: 'Rubik Mono One', sans-serif !important;
 }
 
+.nav-link{
+    border-right: 1px gray solid;
+    padding-right: 10px;
+}
+
 .footer{
     font-family: 'Rubik Mono One', sans-serif !important;
     font-size: 10px;

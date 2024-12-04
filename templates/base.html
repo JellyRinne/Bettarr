@@ -14,9 +14,13 @@
 {% endblock %}
 
 {% block navbar %}
+    {% include "navbar.html" %}
 {% endblock %}
 
 {% block content %}
         {% block page_content %}
+        {% endblock %}
+        {% block footer %}
+            {% include "footer.html" %}
         {% endblock %}
 {% endblock %}
