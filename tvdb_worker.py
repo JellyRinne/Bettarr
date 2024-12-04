@@ -36,4 +36,15 @@ def getMoviesInitialSync():
     rc1.set('allMovieInitialSyncEnd',str(datetime.datetime.now()))
     
 
-getMoviesInitialSync()
+#getMoviesInitialSync()
+
+#def getMoviesTestFailure():
+#    tvdb = tvdb_v4_official.TVDB(constants.tvdb_apikey)
+#    movies = []
+#    movies = tvdb.get_all_movies(page=999)
+#
+#    print(str(movies))
+
+#getMoviesTestFailure()
+
+# returns empty array as expected
