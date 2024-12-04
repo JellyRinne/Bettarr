@@ -12,7 +12,7 @@ from turbo_flask import Turbo
 
 turbo = Turbo()
 bootstrap = Bootstrap()
-bettarrRedis = redis.Redis(host='localhost', port=6379, db=0)
+rc = redis.Redis(host='localhost', port=6379, db=0, charset="utf-8", decode_responses=True)
 
 def create_app():
     app = Flask(__name__)
