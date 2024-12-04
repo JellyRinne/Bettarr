@@ -1,4 +1,4 @@
-# Install homebrew
+# Check for and Install homebrew if missing
 which -s brew
 if [[ $? != 0 ]] ; then
     # Install Homebrew
