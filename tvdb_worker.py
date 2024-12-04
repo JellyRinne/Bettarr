@@ -9,10 +9,12 @@ import constants
 
 def getMoviesInitialSync():
     #connect to meta db
-    rc1 = redis.Redis(host='localhost', port=6379, db=constants.metadb, charset="utf-8", decode_responses=True)
+    rc1 = redis.Redis(host='localhost', port=6379, db=constants.metadb, charset="utf-8", 
+                      decode_responses=True)
 
     #connect to movies db
-    rc2 = redis.Redis(host='localhost', port=6379, db=constants.moviesdb, charset="utf-8", decode_responses=True)
+    rc2 = redis.Redis(host='localhost', port=6379, db=constants.moviesdb, charset="utf-8", 
+                      decode_responses=True)
     tvdb = tvdb_v4_official.TVDB(constants.tvdb_apikey)
 
     #log start time of sync
