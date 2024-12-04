@@ -22,7 +22,6 @@ def getMoviesInitialSync():
     while True:
         movies = tvdb.get_all_movies(page=page)
         if (movies != []):
-            print('page: ' + str(page))
             for movie in movies:
                 rc2.set(movie['id'],str(movie))
             page += 1
