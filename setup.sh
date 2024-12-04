@@ -26,3 +26,4 @@ python3 -m pip install flask_bootstrap
 python3 -m pip install turbo_flask
 python3 -m pip install gunicorn
 python3 -m pip install "redis[hiredis]"
+python3 -m pip install tvdb_v4_official

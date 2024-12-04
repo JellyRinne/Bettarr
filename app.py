@@ -4,6 +4,8 @@ import time
 import threading
 import redis
 
+import constants
+
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from turbo_flask import Turbo
@@ -23,4 +25,20 @@ app.config['SERVER_NAME'] = '127.0.0.1:8080'
 
 @app.route("/")
 def index():
+    return render_template('index.html')
+
+@app.route("/movies")
+def movies():
+    return render_template('index.html')
+
+@app.route("/television")
+def television():
+    return render_template('index.html')
+
+@app.route("/music")
+def music():
+    return render_template('index.html')
+
+@app.route("/settings")
+def settings():
     return render_template('index.html')

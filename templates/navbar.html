@@ -2,15 +2,15 @@
     <div class="navbar navbar-inverse navbar-static-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">bettarr</a>
+                <a class="navbar-brand" href={{ url_for('index') }}>bettarr</a>
             </div>
             <div class="navbar-collapse collapse">
                 <span class="navbar-text">
-                    dashboard
-                    movies
-                    television
-                    music
-                    settings
+                    <a class="nav-link" href={{ url_for('index') }}>dashboard</a>
+                    <a class="nav-link" href={{ url_for('movies') }}>movies</a>
+                    <a class="nav-link" href={{ url_for('television') }}>television</a>
+                    <a class="nav-link" href={{ url_for('music') }}>music</a>
+                    <a class="nav-link" href={{ url_for('settings') }}>settings</a>
                 </span>
             </div>
         </div>

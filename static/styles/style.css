@@ -9,3 +9,15 @@ body{
 .navbar{
     font-family: 'Rubik Mono One', sans-serif !important;
 }
+
+.footer{
+    font-family: 'Rubik Mono One', sans-serif !important;
+    font-size: 10px;
+    color: white;
+    background-color: black;
+    padding: 4px;
+}
+
+.reflogo{
+    height: 14px;
+}
