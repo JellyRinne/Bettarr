@@ -34,7 +34,20 @@ def getMoviesInitialSync():
 
     #log end time of initial sync
     rc1.set('allMovieInitialSyncEnd',str(datetime.datetime.now()))
+    rc1.bgsave()
     
+
+
+
+
+
+
+
+
+
+
+
+
 
 #getMoviesInitialSync()
 
