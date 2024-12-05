@@ -34,29 +34,40 @@ def getMoviesInitialSync():
     rc1.set('allMovieInitialSyncEnd',str(datetime.datetime.now()))
 
 def getUpdateActionUpdateMovies():
-    #connect to meta db
+    # Connect to meta db
     rc1 = redis.Redis(host='localhost', port=6379, db=constants.metadb, charset="utf-8", 
                       decode_responses=True)
 
-    #connect to movies db
+    # Connect to movies db
     rc2 = redis.Redis(host='localhost', port=6379, db=constants.moviesdb, charset="utf-8", 
                       decode_responses=True)
     tvdb = tvdb_v4_official.TVDB(constants.tvdb_apikey)
 
-    #log start time of sync
+    # Log start time of sync
     rc1.set('allMovieLastUpdateStart',str(datetime.datetime.now()))
 
-    #get end of initial movie sync as epoch time
-    dt = datetime.datetime.strptime(rc1.get('allMovieInitialSyncEnd'),constants.date_format)
-    lastUpdateEpoch = int(dt.timestamp())
+    # Get end of initial movie sync as epoch time
+    initialSyncEpoch = 0
+    if rc1.get('allMovieInitialSyncEnd'):
+        dt = datetime.datetime.strptime(rc1.get('allMovieInitialSyncEnd'),constants.date_format)
+        initialSyncEpoch = int(dt.timestamp())
+
+    # Get end of last movie update sync as epoch time
+    lastUpdateEpoch = 0
+    if rc1.get('allMovieLastUpdateEnd'):
+        dt = datetime.datetime.strptime(rc1.get('allMovieLastUpdateEnd'),constants.date_format)
+        lastUpdateEpoch = int(dt.timestamp())
     
-    #retrieve movie updates since that sync time
+    # Retrieve movie updates since that sync time
     page = 0
 
     while True:
         # Returns a list of updated movies, we still need to actually retrieve the updates
         # later on
-        movies = tvdb.get_updates(type='movies', action='update', since=lastUpdateEpoch, page=page)
+        if lastUpdateEpoch:
+            movies = tvdb.get_updates(type='movies', action='update', since=lastUpdateEpoch, page=page)
+        else:
+            movies = tvdb.get_updates(type='movies', action='update', since=initialSyncEpoch, page=page)
         if (movies != []):
             for movie in movies:
                 # Here we can retrieve the actual info of the updated movies
@@ -67,7 +78,7 @@ def getUpdateActionUpdateMovies():
             break
 
     #log end time of sync
-    rc1.set('allMovieLastUpdateStart',str(datetime.datetime.now()))
+    rc1.set('allMovieLastUpdateEnd',str(datetime.datetime.now()))
     
 #getMoviesInitialSync()
 getUpdateActionUpdateMovies()
