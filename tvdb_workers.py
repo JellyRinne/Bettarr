@@ -46,13 +46,13 @@ def getUpdateActionUpdateMovies():
     # Log start time of sync
     rc1.set('allMovieLastUpdateStart',str(datetime.datetime.now()))
 
-    # Get end of initial movie sync as epoch time
+    # Get end of initial movie sync as epoch time, if it's not there, set to 0
     initialSyncEpoch = 0
     if rc1.get('allMovieInitialSyncEnd'):
         dt = datetime.datetime.strptime(rc1.get('allMovieInitialSyncEnd'),constants.date_format)
         initialSyncEpoch = int(dt.timestamp())
 
-    # Get end of last movie update sync as epoch time
+    # Get end of last movie update sync as epoch time, if it's not there, set to 0
     lastUpdateEpoch = 0
     if rc1.get('allMovieLastUpdateEnd'):
         dt = datetime.datetime.strptime(rc1.get('allMovieLastUpdateEnd'),constants.date_format)
@@ -64,7 +64,7 @@ def getUpdateActionUpdateMovies():
     while True:
         # Returns a list of updated movies, we still need to actually retrieve the updates
         # later on
-        if lastUpdateEpoch:
+        if lastUpdateEpoch > 0:
             movies = tvdb.get_updates(type='movies', action='update', since=lastUpdateEpoch, page=page)
         else:
             movies = tvdb.get_updates(type='movies', action='update', since=initialSyncEpoch, page=page)
