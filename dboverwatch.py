@@ -4,6 +4,8 @@ import time
 import schedule
 import redis
 
+import constants
+
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename='dboverwatch.log', encoding='utf-8', level=logging.DEBUG)
 logging.info(str(datetime.datetime.now()) + ' - SESSION STARTED')
