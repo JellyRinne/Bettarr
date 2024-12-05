@@ -1,6 +1,7 @@
 import datetime
 import logging
 import redis
+from redis.commands.json.path import Path
 import tvdb_v4_official
 
 import constants
@@ -23,7 +24,7 @@ def getMoviesInitialSync():
         movies = tvdb.get_all_movies(page=page)
         if (movies != []):
             for movie in movies:
-                rc2.set(movie['id'],str(movie))
+                rc2.set(movie['id'],movie)
             page += 1
             movies = []
         else:
@@ -53,10 +54,13 @@ def getUpdateActionUpdateMovies():
     page = 0
 
     while True:
-        movies = tvdb.get_updates(action='update', since=lastUpdateEpoch, page=page)
+        # Returns a list of updated movies, we still need to actually retrieve the updates
+        # later on
+        movies = tvdb.get_updates(type='movies', action='update', since=lastUpdateEpoch, page=page)
         if (movies != []):
             for movie in movies:
-                rc2.set(movie['id'],str(movie))
+                # Here we can retrieve the actual info of the updated movies
+                rc2.set(movie['recordId'],str(tvdb.get_movie(movie['recordId'])))
             page += 1
             movies = []
         else:
