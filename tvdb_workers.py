@@ -72,6 +72,7 @@ def getUpdateActionUpdateMovies():
             for movie in movies:
                 # Here we can retrieve the actual info of the updated movies
                 rc2.set(movie['recordId'],str(tvdb.get_movie(movie['recordId'])))
+                print(movie)
             page += 1
             movies = []
         else:
