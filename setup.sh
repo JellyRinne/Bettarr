@@ -21,6 +21,7 @@ python3 -m ensurepip --upgrade pip
 python3 -m pip install --upgrade pip
 
 #Install python dependencies
+python3 -m pip install schedule
 python3 -m pip install flask
 python3 -m pip install flask_bootstrap
 python3 -m pip install turbo_flask

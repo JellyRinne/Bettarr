@@ -1,7 +1,5 @@
 import datetime
 import logging
-import time
-import threading
 import redis
 import tvdb_v4_official
 
